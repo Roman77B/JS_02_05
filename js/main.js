@@ -5,7 +5,9 @@ const app = new Vue({
     data: {
         catalogUrl: '/catalogData.json',
         products: [],
-        imgCatalog: 'https://placehold.it/200x150'
+        imgCatalog: 'https://placehold.it/200x150',
+        searchfield: '',
+        showCart: false
     },
     methods: {
         getJson(url){
@@ -17,6 +19,10 @@ const app = new Vue({
         },
         addProduct(product){
             console.log(product.id_product);
+        },
+        search (name) {
+            const regExp = new RegExp(this.searchfield, 'i')
+            return regExp.test (name)
         }
     },
     mounted(){
@@ -26,12 +32,12 @@ const app = new Vue({
                    this.products.push(el);
                }
            });
-        this.getJson(`getProducts.json`)
+        /*this.getJson(`/getProducts.json`)
             .then(data => {
                 for(let el of data){
                     this.products.push(el);
                 }
-            })
+            })*/
     }
 })
 
